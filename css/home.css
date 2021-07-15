@@ -10,10 +10,32 @@
 
 /* CUSTOM HOME PAGE STYLE BELOW THIS COMMENT LINE */
 
+.bg-light {
+  background-color: var(--light-color);
+}
+.bg-grey {
+  background-color: var(--grey-color);
+}
+.bg-dark {
+  background-color: var(--dark-color);
+}
+
 /* HEADER START */
+header.container {
+  padding-top: 0;
+  padding-bottom: 0;
+}
 /* HEADER END */
 
 /* HERO START */
+.hero {
+  min-height: 100vh;
+  background-color: yellow;
+  background-image: url(../img/bg.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
 /* HERO END */
 
 /* ABOUT ME START */
@@ -38,4 +60,10 @@
 /* CONTACT US END */
 
 /* FOOTER START */
+footer.container {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  color: #ccc;
+  text-align: center;
+}
 /* FOOTER END */
