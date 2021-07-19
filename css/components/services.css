@@ -1,0 +1,27 @@
+.service {
+  padding: 40px 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 5px 20px #0002;
+}
+.service > .icon {
+  width: 70px;
+  height: 70px;
+  font-size: 30px;
+  line-height: 68px;
+  background-color: var(--grey-color);
+  border-radius: 50%;
+  transition: all 0.5s;
+}
+.service:hover > .icon {
+  background-color: var(--dark-color);
+  color: var(--grey-color);
+}
+.service > .title {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.service > .description {
+}
