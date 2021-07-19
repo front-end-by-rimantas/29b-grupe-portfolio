@@ -4,6 +4,7 @@
 @import './base/layout.css';
 
 /* 3rd-party */
+@import './3rd-party/font-awesome.min.css';
 
 /* components */
 @import './components/button.css';
@@ -30,7 +31,7 @@ header.container {
 /* HERO START */
 .hero {
   min-height: 100vh;
-  background-color: yellow;
+  background-color: #05334d;
   background-image: url(../img/bg.jpg);
   background-size: cover;
   background-position: center;
