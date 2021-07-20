@@ -1,0 +1,36 @@
+.btn {
+  display: inline-block;
+  padding: 10px 30px;
+  font-size: 15px;
+  line-height: 20px;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #000;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.5s, background-color 0.5s;
+}
+.btn:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.btn.btn-white {
+  background-color: #fff;
+  color: #000;
+}
+.btn.btn-white:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.btn.btn-big {
+  padding: 15px 40px;
+  font-size: 18px;
+  line-height: 20px;
+}
+.btn.btn-small {
+  padding: 5px 15px;
+  font-size: 13px;
+  line-height: 18px;
+}
