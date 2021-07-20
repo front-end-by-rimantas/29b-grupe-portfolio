@@ -1,5 +1,8 @@
 // IMPORT: DATA + COMPONENTS
 
+import { Services } from "./components/services/Services.js";
+import { servicesData } from "./data/servicesData.js";
+
 
 // CODE EXECUTION
 
@@ -13,6 +16,7 @@
 /* ABOUT ME END */
 
 /* SERVICES START */
+new Services('#services_block', servicesData);
 /* SERVICES END */
 
 /* PORTFOLIO START */
