@@ -71,28 +71,28 @@ class Services {
         if (typeof item !== 'object' ||
             item === null ||
             Array.isArray(item)) {
-            console.error('ERROR: paslaugos objektas turi buti tikras objektas {}');
+            console.warn('ERROR: paslaugos objektas turi buti tikras objektas {}');
             return false;
         }
 
         // icon ne tuscias tekstas
         if (typeof item.icon !== 'string' ||
             item.icon === '') {
-            console.error('ERROR: paslaugos icon turi buti ne tuscias tekstas');
+            console.warn('ERROR: paslaugos icon turi buti ne tuscias tekstas');
             return false;
         }
 
         // title ne tuscias tekstas
         if (typeof item.title !== 'string' ||
             item.title === '') {
-            console.error('ERROR: paslaugos title turi buti ne tuscias tekstas');
+            console.warn('ERROR: paslaugos title turi buti ne tuscias tekstas');
             return false;
         }
 
         // description ne tuscias tekstas
         if (typeof item.description !== 'string' ||
             item.description === '') {
-            console.error('ERROR: paslaugos description turi buti ne tuscias tekstas');
+            console.warn('ERROR: paslaugos description turi buti ne tuscias tekstas');
             return false;
         }
         return true;
