@@ -3,6 +3,30 @@
   flex-direction: column;
   gap: 40px;
 }
+.gallery > .filter {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+.gallery > .filter > .tag {
+  font-size: 20px;
+  font-weight: bold;
+  position: relative;
+}
+.gallery > .filter > .tag::before {
+  content: '';
+  display: inline-block;
+  height: 3px;
+  background-color: #000;
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 100%;
+  transition: right 0.5s;
+}
+.gallery > .filter > .tag.active::before {
+  right: 0;
+}
 .gallery > .content {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
