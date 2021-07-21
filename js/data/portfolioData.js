@@ -1,0 +1,3 @@
+const portfolioData = [];
+
+export { portfolioData }

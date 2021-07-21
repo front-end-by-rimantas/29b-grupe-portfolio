@@ -1,6 +1,8 @@
 // IMPORT: DATA + COMPONENTS
 
+import { Gallery } from "./components/gallery/Gallery.js";
 import { Services } from "./components/services/Services.js";
+import { portfolioData } from "./data/portfolioData.js";
 import { servicesData } from "./data/servicesData.js";
 
 
@@ -20,6 +22,7 @@ new Services('#services_block', servicesData);
 /* SERVICES END */
 
 /* PORTFOLIO START */
+new Gallery('#portfolio_gallery_block', portfolioData);
 /* PORTFOLIO END */
 
 /* TESTIMONIALS START */
