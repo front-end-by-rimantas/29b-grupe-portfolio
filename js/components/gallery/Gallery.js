@@ -207,15 +207,35 @@ class Gallery {
 
         let HTML = `<div class="filter">
                         <div class="tag active">All</div>
-                        <div class="tag">Dog</div>
-                        <div class="tag">Cat</div>
-                        <div class="tag">Hamster</div>
+                        ${this.generateFilterTagsHTML()}
                     </div>
                     <div class="content">
                         ${itemsHTML}
                     </div>`;
 
         this.DOM.innerHTML = HTML;
+    }
+
+    generateFilterTagsHTML() {
+        let HTML = '';
+
+        let allTags = [];
+        for (const item of this.usedItems) {
+            allTags = [...allTags, ...item.tags];
+        }
+
+        const uniqueTags = [];
+        for (const tag of allTags) {
+            if (!uniqueTags.includes(tag.toLowerCase())) {
+                uniqueTags.push(tag.toLowerCase());
+            }
+        }
+
+        for (const tag of uniqueTags) {
+            HTML += `<div class="tag">${tag}</div>`;
+        }
+
+        return HTML;
     }
 
     generateContentItemHTML(item) {
