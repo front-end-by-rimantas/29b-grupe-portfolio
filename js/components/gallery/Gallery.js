@@ -7,6 +7,8 @@ class Gallery {
         this.maxItems = 3;
         this.renderingStrategiesOptions = ['first', 'last', 'random'];
         this.renderingStrategy = this.renderingStrategiesOptions[0];
+        this.validItems = [];
+        this.usedItems = [];
 
         this.init();
     }
@@ -15,11 +17,15 @@ class Gallery {
         // validacijos
         if (!this.isValidSelector() ||
             !this.isValidData() ||
-            !this.findTargetElement()) {
+            !this.findTargetElement() ||
+            !this.filterOnlyValidDataList()) {
             return false;
         }
 
         // logika
+        this.filterContentList();
+        this.render();
+
         // events
     }
 
@@ -76,6 +82,123 @@ class Gallery {
     findTargetElement() {
         this.DOM = document.querySelector(this.selector);
         return !!this.DOM;
+    }
+
+    filterOnlyValidDataList() {
+        for (const item of this.data.list) {
+            if (this.isValidItem(item)) {
+                this.validItems.push(item);
+            }
+        }
+
+        if (this.validItems.length === 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    isValidItem(item) {
+        if (typeof item !== 'object' ||
+            item === null ||
+            Array.isArray(item)) {
+            return false;
+        }
+
+        if (typeof item.img !== 'string' ||
+            item.img === '') {
+            return false;
+        }
+
+        if (typeof item.alt !== 'string' ||
+            item.alt === '') {
+            return false;
+        }
+
+        if (typeof item.text !== 'string' ||
+            item.text === '') {
+            return false;
+        }
+
+        if (typeof item.link !== 'string' ||
+            item.link === '') {
+            return false;
+        }
+
+        if (!Array.isArray(item.tags) ||
+            item.tags.length === 0) {
+            return false;
+        }
+
+        const validTags = [];
+        for (const tag of item.tags) {
+            if (typeof tag === 'string' &&
+                tag !== '') {
+                validTags.push(tag);
+            }
+        }
+        if (validTags.length === 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    filterContentList() {
+        if (this.renderingStrategy === 'first') {
+            if (this.validItems.length <= this.maxItems) {
+                this.usedItems = this.validItems;
+            } else {
+                this.usedItems = this.validItems.slice(0, this.maxItems);
+            }
+        }
+
+        if (this.renderingStrategy === 'last') {
+            if (this.validItems.length <= this.maxItems) {
+                this.usedItems = this.validItems;
+            } else {
+                this.usedItems = this.validItems.slice(this.validItems.length - this.maxItems, this.validItems.length);
+            }
+        }
+
+        if (this.renderingStrategy === 'random') {
+            const count = this.validItems.length <= this.maxItems ? this.validItems.length : this.maxItems;
+
+
+        }
+    }
+
+    render() {
+        let itemsHTML = '';
+
+        for (const item of this.usedItems) {
+            itemsHTML += this.generateContentItemHTML(item);
+        }
+
+        let HTML = `<div class="filter">
+                        <div class="tag active">All</div>
+                        <div class="tag">Dog</div>
+                        <div class="tag">Cat</div>
+                        <div class="tag">Hamster</div>
+                    </div>
+                    <div class="content">
+                        ${itemsHTML}
+                    </div>`;
+
+        this.DOM.innerHTML = HTML;
+    }
+
+    generateContentItemHTML(item) {
+        return `<div class="item">
+                    <img src="${this.data.imgPath + item.img}" alt="${item.alt}">
+                    <div class="overlay">
+                        <div class="title">${item.text}</div>
+                        <div class="actions">
+                            <a href="${item.link}" class="fa fa-link"></a>
+                            <i class="fa fa-search-plus"></i>
+                        </div>
+                    </div>
+                </div>`;
     }
 }
 
