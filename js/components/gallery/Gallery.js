@@ -4,6 +4,9 @@ class Gallery {
         this.data = data;
 
         this.DOM = null;
+        this.maxItems = 3;
+        this.renderingStrategiesOptions = ['first', 'last', 'random'];
+        this.renderingStrategy = this.renderingStrategiesOptions[0];
 
         this.init();
     }
@@ -29,6 +32,44 @@ class Gallery {
     }
 
     isValidData() {
+        // this.data turi buti tikras objektas
+        if (typeof this.data !== 'object' ||
+            this.data === null ||
+            Array.isArray(this.data)) {
+            return false;
+        }
+
+        // this.data.imgPath turi buti ne tuscias tekstas
+        const imgPath = this.data.imgPath;
+        if (typeof imgPath !== 'string' ||
+            imgPath === '') {
+            return false;
+        }
+
+        // this.data.list turi buti ne tuscias array (sarasas)
+        const list = this.data.list;
+        if (!Array.isArray(list) ||
+            list.length === 0) {
+            return false;
+        }
+
+        // this.data.maxItems turi buti teigiamas sveikasis skaicius
+        const maxItems = this.data.maxItems;
+        if (typeof maxItems === 'number' &&
+            isFinite(maxItems) &&
+            maxItems > 0 &&
+            maxItems % 1 === 0) {
+            this.maxItems = maxItems;
+        }
+
+        // this.data.renderingStrategy turi buti ne tuscias tekstas ir priklausyti imanomu strategiju sarasui
+        const renderingStrategy = this.data.renderingStrategy;
+        if (typeof renderingStrategy === 'string' &&
+            renderingStrategy !== '' &&
+            this.renderingStrategiesOptions.includes(renderingStrategy)) {
+            this.renderingStrategy = renderingStrategy;
+        }
+
         return true;
     }
 
