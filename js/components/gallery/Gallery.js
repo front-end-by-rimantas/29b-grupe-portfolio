@@ -5,7 +5,7 @@ class Gallery {
 
         this.DOM = null;
         this.maxItems = 3;
-        this.renderingStrategiesOptions = ['first', 'last', 'random'];
+        this.renderingStrategiesOptions = ['first', 'last', 'random', 'xyz'];
         this.renderingStrategy = this.renderingStrategiesOptions[0];
         this.validItems = [];
         this.usedItems = [];
@@ -146,25 +146,55 @@ class Gallery {
 
     filterContentList() {
         if (this.renderingStrategy === 'first') {
-            if (this.validItems.length <= this.maxItems) {
-                this.usedItems = this.validItems;
-            } else {
-                this.usedItems = this.validItems.slice(0, this.maxItems);
-            }
+            this.filterContentListFirst();
         }
 
         if (this.renderingStrategy === 'last') {
-            if (this.validItems.length <= this.maxItems) {
-                this.usedItems = this.validItems;
-            } else {
-                this.usedItems = this.validItems.slice(this.validItems.length - this.maxItems, this.validItems.length);
-            }
+            this.filterContentListLast();
         }
 
         if (this.renderingStrategy === 'random') {
-            const count = this.validItems.length <= this.maxItems ? this.validItems.length : this.maxItems;
+            this.filterContentListRandom();
+        }
+    }
 
+    filterContentListFirst() {
+        const validCount = this.validItems.length;
 
+        if (validCount <= this.maxItems) {
+            this.usedItems = this.validItems;
+        } else {
+            this.usedItems = this.validItems.slice(0, this.maxItems);
+        }
+    }
+
+    filterContentListLast() {
+        const validCount = this.validItems.length;
+
+        if (validCount <= this.maxItems) {
+            this.usedItems = this.validItems;
+        } else {
+            this.usedItems = this.validItems.slice(validCount - this.maxItems, validCount);
+        }
+    }
+
+    filterContentListRandom() {
+        const validCount = this.validItems.length;
+
+        const count = validCount <= this.maxItems ? validCount : this.maxItems;
+
+        // itraukiame tik norimu elementu index'us
+        const selectedIndexes = [];
+
+        while (selectedIndexes.length < count) {
+            const randomIndex = Math.floor(Math.random() * validCount);
+            if (!selectedIndexes.includes(randomIndex)) {
+                selectedIndexes.push(randomIndex);
+            }
+        }
+
+        for (const index of selectedIndexes) {
+            this.usedItems.push(this.validItems[index]);
         }
     }
 
