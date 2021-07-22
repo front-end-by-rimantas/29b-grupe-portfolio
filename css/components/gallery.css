@@ -12,6 +12,7 @@
   font-size: 20px;
   font-weight: bold;
   position: relative;
+  cursor: pointer;
 }
 .gallery > .filter > .tag::before {
   content: '';

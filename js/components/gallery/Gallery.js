@@ -4,6 +4,8 @@ class Gallery {
         this.data = data;
 
         this.DOM = null;
+        this.allTagsDOM = null;
+        this.allListItemsDOM = null;
         this.maxItems = 3;
         this.renderingStrategiesOptions = ['first', 'last', 'random', 'xyz'];
         this.renderingStrategy = this.renderingStrategiesOptions[0];
@@ -27,6 +29,7 @@ class Gallery {
         this.render();
 
         // events
+        this.addEvents();
     }
 
     isValidSelector() {
@@ -214,6 +217,9 @@ class Gallery {
                     </div>`;
 
         this.DOM.innerHTML = HTML;
+
+        this.allTagsDOM = this.DOM.querySelectorAll('.tag');
+        this.allListItemsDOM = this.DOM.querySelectorAll('.item');
     }
 
     generateFilterTagsHTML() {
@@ -249,6 +255,14 @@ class Gallery {
                         </div>
                     </div>
                 </div>`;
+    }
+
+    addEvents() {
+        for (const tagDOM of this.allTagsDOM) {
+            tagDOM.addEventListener('click', () => {
+                console.log(tagDOM.textContent);
+            })
+        }
     }
 }
 
